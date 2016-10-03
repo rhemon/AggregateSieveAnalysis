@@ -1,5 +1,7 @@
 package io.github.rhemon.aggregatesieveanalysis;
 
+import java.util.List;
+
 /**
  * Provides static functions for performing the calculations for sieve analysis of aggregate  
  * @author Ridhwanul Haque
@@ -35,7 +37,7 @@ public class SieveAnalysisCalc {
 	 * 								the values provide as input
 	 * 
 	 */
-	public static double CaclCumulativePercentRetained(double... percentRetainedValues) {
+	public static double CaclCumulativePercentRetained(List<Double> percentRetainedValues) {
 		double cumulativePercentRetained = 0;
 		for (double percentRetained : percentRetainedValues) {
 			cumulativePercentRetained += percentRetained;
@@ -64,7 +66,7 @@ public class SieveAnalysisCalc {
 	 * 										  sieve no.100
 	 * @return								  Returns a double value, which is the fineness modulus of the aggregate 
 	 */
-	public static double CalcFinenessModulus(double... cumulativePercentRetainedValues){
+	public static double CalcFinenessModulus(List<Double> cumulativePercentRetainedValues){
 		double total = 0;
 		for (double cumulativePercentRetained: cumulativePercentRetainedValues){
 			total+= cumulativePercentRetained;

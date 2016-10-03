@@ -1,6 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-</LinearLayout>
+<TableRow
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <TextView
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:id="@+id/SIEVE_NO"
+        android:padding="5dp"
+        />
+    <TextView
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:id="@+id/SIEVE_OPENING"
+        android:padding="5dp"
+        />
+    <TextView
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:id="@+id/WEIGHT_RETAINED"
+        android:padding="5dp"
+        />
+    <TextView
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:id="@+id/PERCENT_RETAINED"
+        android:padding="5dp"
+        />
+    <TextView
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:id="@+id/CUMULATIVE_PERCENT"
+        android:padding="5dp"
+        />
+    <TextView
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:id="@+id/PERCENT_FINER"
+        android:padding="5dp"
+        />
+</TableRow>

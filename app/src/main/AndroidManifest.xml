@@ -16,7 +16,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".DataEntryActivity" android:windowSoftInputMode="adjustPan"></activity>
-        <activity android:name=".ResultActivity"></activity>
+        <activity android:name=".ResultActivity" android:screenOrientation="landscape"></activity>
     </application>
 
 </manifest>
