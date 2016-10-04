@@ -14,8 +14,7 @@
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:orientation="vertical"
-        android:background="@color/colorLightBlue500">
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -23,7 +22,9 @@
             android:layout_weight="1"
             android:orientation="vertical"
             android:padding="10dp"
-            android:background="@color/colorLightBlue700">
+            android:background="@color/colorLightBlue700"
+            android:id="@+id/graphTab"
+            android:onClick="onTabSelection">
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
@@ -41,7 +42,10 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:orientation="vertical"
-            android:padding="10dp">
+            android:padding="10dp"
+            android:background="@color/colorLightBlue500"
+            android:id="@+id/tableTab"
+            android:onClick="onTabSelection">
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
@@ -59,7 +63,10 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:orientation="vertical"
-            android:padding="10dp">
+            android:padding="10dp"
+            android:background="@color/colorLightBlue500"
+            android:id="@+id/resultTab"
+            android:onClick="onTabSelection">
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="0dp"

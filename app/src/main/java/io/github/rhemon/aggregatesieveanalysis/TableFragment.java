@@ -34,11 +34,6 @@ public class TableFragment extends Fragment {
 
         try {
             JSONObject data = new JSONObject(getArguments().getString("data"));
-            Log.d(LOG_TAG, data.toString());
-            ((TextView) view.findViewById(R.id.fm)).setText("Fineness Modulus = " + String.format("%.2f", data.getDouble("FINENESS_MODULUS")));
-            ((TextView) view.findViewById(R.id.d60)).setText("D60 = " + String.format("%.2f", data.getDouble("D60")));
-            ((TextView) view.findViewById(R.id.d10)).setText("D10 = " + String.format("%.2f", data.getDouble("D10")));
-            ((TextView) view.findViewById(R.id.uc)).setText("Uniform Coefficient = " + String.format("%.2f", data.getDouble("CU")));
 
             for (int i = 0; i < 8; i++) {
                 View tableRow = LayoutInflater.from(view.getContext()).inflate(R.layout.table_item_view, tl, false);
