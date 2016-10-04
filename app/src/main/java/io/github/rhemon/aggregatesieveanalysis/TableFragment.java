@@ -48,9 +48,9 @@ public class TableFragment extends Fragment {
                     WeightRetained = Double.toString(data.getJSONObject("WEIGHT_RETAINED").getDouble("PAN"));
                 }
 
-                String PercentRetained = data.getJSONArray("PERCENT_RETAINED_VALUES").get(i).toString();
-                String CumulativePercent = data.getJSONArray("CUMULATIVE_PERCENTS").get(i).toString();
-                String PercentFiner = data.getJSONArray("PERCENT_FINER").get(i).toString();
+                String PercentRetained = String.format("%.2f", Double.parseDouble(data.getJSONArray("PERCENT_RETAINED_VALUES").get(i).toString()));
+                String CumulativePercent = String.format("%.2f", Double.parseDouble(data.getJSONArray("CUMULATIVE_PERCENTS").get(i).toString()));
+                String PercentFiner = String.format("%.2f", Double.parseDouble(data.getJSONArray("PERCENT_FINER").get(i).toString()));
                 ((TextView)tableRow.findViewById(R.id.SIEVE_NO)).setText(SieveNumberText);
                 ((TextView)tableRow.findViewById(R.id.SIEVE_OPENING)).setText(SieveOpening);
                 ((TextView)tableRow.findViewById(R.id.WEIGHT_RETAINED)).setText(WeightRetained);

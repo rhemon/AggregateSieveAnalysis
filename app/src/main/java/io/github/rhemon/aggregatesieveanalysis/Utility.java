@@ -62,7 +62,7 @@ public class Utility {
         result.put("PERCENT_FINER", new JSONArray(percentFiners));
 
         // find fineness modulus
-        double finenessModulus = SieveAnalysisCalc.CalcFinenessModulus(cumulativePercents);
+        double finenessModulus = SieveAnalysisCalc.CalcFinenessModulus(cumulativePercents.subList(0, 6));
         result.put("FINENESS_MODULUS", finenessModulus);
 
         return result;

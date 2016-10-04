@@ -178,15 +178,12 @@ public class SemiLogGraph extends View {
             } catch (JSONException e) {
                 Log.d(LOG_TAG, "JSONException occured in SemiLogGraph.java");
             }
+            try {
+                ((ResultActivity) getContext()).set_resultData(D60, D10);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
         }
-    }
-
-    public double getD60() {
-        return this.D60;
-    }
-
-    public double getD10() {
-        return this.D10;
     }
 
     public void setData(JSONObject data) {
