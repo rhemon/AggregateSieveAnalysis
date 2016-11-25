@@ -5,7 +5,7 @@
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
+        android:label="@string/launcher_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity">
@@ -15,8 +15,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".DataEntryActivity" android:windowSoftInputMode="adjustPan"></activity>
-        <activity android:name=".ResultActivity" android:screenOrientation="landscape"></activity>
+        <activity
+            android:name=".DataEntryActivity"
+            android:windowSoftInputMode="stateVisible|adjustResize"
+            android:parentActivityName=".MainActivity">
+
+        </activity>
+        <activity android:name=".ResultActivity" android:screenOrientation="landscape" android:parentActivityName=".MainActivity"></activity>
+        <provider
+            android:name=".data.ASAProvider"
+            android:authorities="io.github.rhemon.aggregatesieveanalysis"
+            android:exported="false" />
     </application>
 
 </manifest>

@@ -1,3 +1,9 @@
 <resources>
-    <string name="app_name">"Aggregate Sieve Analysis "</string>
+    <string name="app_name">"Aggregate Sieve Analysis"</string>
+    <string name="launcher_name">ASA</string>
+    <string name="action_save">Save</string>
+    <string name="action_delete">Delete</string>
+    <string name="action_edit">Edit</string>
+    <string name="action_delete_all">Remove All Data</string>
+    <string name="empty_view_title_text">Its a bit lonely here...</string>
 </resources>
