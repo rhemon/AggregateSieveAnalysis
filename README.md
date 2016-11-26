@@ -4,7 +4,7 @@ Simple android application that will do the very basic sieve analysis of aggrega
 
 Personally I do not have enough knowledge on sieve analysis, so it probably lacks lots of thing that should have been part of sieve analysis, therefore this application is open source,welcoming developers to edit and bring a better and complete app for android.
 
-Here are few TODOs that I have kept for future:
+Here are few TODOs that I have kept for future:<br/>
 1. Adding an option to export all data as pdf file, and also allowing to print it.<br/>
 2. Giving an option to add other sieve no. on data entry.<br/>
 3. Making the graph zoomable <br/>
