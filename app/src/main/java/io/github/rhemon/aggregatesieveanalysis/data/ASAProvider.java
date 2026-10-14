@@ -7,7 +7,6 @@ import android.content.UriMatcher;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
-import android.support.annotation.Nullable;
 import android.util.Log;
 
 /**
@@ -33,7 +32,6 @@ public class ASAProvider extends ContentProvider {
         return true;
     }
 
-    @Nullable
     @Override
     public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
 
@@ -75,7 +73,6 @@ public class ASAProvider extends ContentProvider {
         return true;
     }
 
-    @Nullable
     @Override
     public Uri insert(Uri uri, ContentValues values) {
         int match = sUriMatcher.match(uri);
@@ -164,7 +161,6 @@ public class ASAProvider extends ContentProvider {
         }
     }
 
-    @Nullable
     @Override
     public String getType(Uri uri) {
         int match = sUriMatcher.match(uri);

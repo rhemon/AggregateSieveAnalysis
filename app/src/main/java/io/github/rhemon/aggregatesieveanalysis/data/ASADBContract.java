@@ -4,12 +4,14 @@ import android.content.ContentResolver;
 import android.net.Uri;
 import android.provider.BaseColumns;
 
+import io.github.rhemon.aggregatesieveanalysis.BuildConfig;
+
 /**
  * Created by rhemon on 9/23/16.
  */
 public class ASADBContract {
 
-    public static final String CONTENT_AUTHORITY = "io.github.rhemon.aggregatesieveanalysis";
+    public static final String CONTENT_AUTHORITY = BuildConfig.APPLICATION_ID;
     public static final Uri BASE_CONTENT_URI = Uri.parse("content://" + CONTENT_AUTHORITY);
     public static final String ASADATA_PATH = "ASADATA";
 

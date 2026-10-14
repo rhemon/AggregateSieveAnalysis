@@ -1,5 +1,6 @@
 package io.github.rhemon.aggregatesieveanalysis;
 
+import android.annotation.SuppressLint;
 import android.app.LoaderManager;
 import android.content.ContentValues;
 import android.content.CursorLoader;
@@ -9,9 +10,8 @@ import android.content.Loader;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.NavUtils;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
+import android.app.AlertDialog;
+import android.app.Activity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -31,7 +31,7 @@ import static android.R.attr.data;
 /**
  * Created by rhemon on 9/21/16.
  */
-public class DataEntryActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
+public class DataEntryActivity extends CompatibleActivity implements LoaderManager.LoaderCallbacks<Cursor> {
 
     final String LOG_TAG = getClass().getSimpleName();
     Uri savedUri;
@@ -57,11 +57,11 @@ public class DataEntryActivity extends AppCompatActivity implements LoaderManage
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
         if (data.moveToFirst()) {
-            setTitle("Edit - " + data.getString(data.getColumnIndex(ASADBContract.ASADBEntry.COLUMN_ASADATA_TITLE)));
-            ((EditText) findViewById(R.id.dataTitle)).setText(data.getString(data.getColumnIndex(ASADBContract.ASADBEntry.COLUMN_ASADATA_TITLE)));
-            ((EditText) findViewById(R.id.dataDesc)).setText(data.getString(data.getColumnIndex(ASADBContract.ASADBEntry.COLUMN_ASADATA_DESC)));
+            setTitle("Edit - " + data.getString(data.getColumnIndexOrThrow(ASADBContract.ASADBEntry.COLUMN_ASADATA_TITLE)));
+            ((EditText) findViewById(R.id.dataTitle)).setText(data.getString(data.getColumnIndexOrThrow(ASADBContract.ASADBEntry.COLUMN_ASADATA_TITLE)));
+            ((EditText) findViewById(R.id.dataDesc)).setText(data.getString(data.getColumnIndexOrThrow(ASADBContract.ASADBEntry.COLUMN_ASADATA_DESC)));
             try {
-                JSONObject wtRtData = new JSONObject(data.getString(data.getColumnIndex(ASADBContract.ASADBEntry.COLUMN_ASDADATA_JSONOBJECT)));
+                JSONObject wtRtData = new JSONObject(data.getString(data.getColumnIndexOrThrow(ASADBContract.ASADBEntry.COLUMN_ASDADATA_JSONOBJECT)));
                 ((EditText) findViewById(R.id.wtRtatSn4)).setText(String.valueOf(wtRtData.getDouble("SIEVE_NO_4")));
                 ((EditText) findViewById(R.id.wtRtatSn8)).setText(String.valueOf(wtRtData.getDouble("SIEVE_NO_8")));
                 ((EditText) findViewById(R.id.wtRtatSn16)).setText(String.valueOf(wtRtData.getDouble("SIEVE_NO_16")));
@@ -251,6 +251,7 @@ public class DataEntryActivity extends AppCompatActivity implements LoaderManage
         }
     }
 
+    @SuppressLint("GestureBackNavigation") // CompatibleActivity registers the system back callback.
     @Override
     public void onBackPressed()
     {

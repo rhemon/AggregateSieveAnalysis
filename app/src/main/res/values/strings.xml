@@ -1,6 +1,9 @@
 <resources>
+    <string name="add_data">Add data</string>
+    <string name="privacy_policy_title">Privacy policy</string>
+    <string name="privacy_policy_text">Aggregate Sieve Analysis 2 works offline. It does not request internet access, create accounts, show ads or use analytics. You enter titles, descriptions and sieve weights. These are stored in the app\'s private database on your device to show past analyses. The developer does not receive your records.\n\nIf Android system backup is enabled, your device may back up and restore app data through your Google account under Google\'s terms. This app does not upload records itself.\n\nYou can delete one record or all records using the app. Uninstalling removes local app data. Any system backup is controlled by your device and Google account settings.\n\nFor privacy questions, visit https://github.com/rhemon/AggregateSieveAnalysis/issues.\n\nLast updated: 14 October 2026.</string>
     <string name="app_name">"Aggregate Sieve Analysis"</string>
-    <string name="launcher_name">ASA</string>
+    <string name="launcher_name">ASA 2</string>
     <string name="action_save">Save</string>
     <string name="action_delete">Delete</string>
     <string name="action_edit">Edit</string>

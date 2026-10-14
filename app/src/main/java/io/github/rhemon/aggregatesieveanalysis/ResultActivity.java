@@ -1,5 +1,6 @@
 package io.github.rhemon.aggregatesieveanalysis;
 
+import android.annotation.SuppressLint;
 import android.app.LoaderManager;
 import android.content.ContentValues;
 import android.content.CursorLoader;
@@ -8,10 +9,10 @@ import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
 import android.net.Uri;
-import android.support.v4.app.FragmentManager;
+import android.app.FragmentManager;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
+import android.app.AlertDialog;
+import android.app.Activity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -34,14 +35,14 @@ import io.github.rhemon.aggregatesieveanalysis.data.ASADBContract;
 /**
  * Created by rhemon on 9/23/16.
  */
-public class ResultActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor>{
+public class ResultActivity extends CompatibleActivity implements LoaderManager.LoaderCallbacks<Cursor>{
 
     final String LOG_TAG = getClass().getSimpleName();
     JSONObject _tableData;
     JSONObject _xyData= new JSONObject();
     JSONObject _resultData = new JSONObject();
     int TAB_SELECTED = R.id.graphTab;
-    FragmentManager _fm = getSupportFragmentManager();
+    FragmentManager _fm;
     Uri contentUri;
     private int backButtonCount;
 
@@ -49,6 +50,7 @@ public class ResultActivity extends AppCompatActivity implements LoaderManager.L
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result);
+        _fm = getFragmentManager();
         contentUri = getIntent().getData();
         getLoaderManager().initLoader(0, null, this);
     }
@@ -96,7 +98,18 @@ public class ResultActivity extends AppCompatActivity implements LoaderManager.L
         _resultData.put("D60", d60);
         _resultData.put("D10", d10);
         Log.d(LOG_TAG, String.valueOf(d60) + " / " + String.valueOf(d10) + " = " + String.valueOf(d60/d10));
-        _resultData.put("CU", SieveAnalysisCalc.CalcUniformityCoefficient(Double.parseDouble(String.format("%.2f", d60)), Double.parseDouble(String.format("%.2f", d10))));
+        if (d10 > 0 && !Double.isNaN(d10) && !Double.isInfinite(d10)
+                && !Double.isNaN(d60) && !Double.isInfinite(d60)) {
+            double roundedD60 = Math.round(d60 * 100.0) / 100.0;
+            double roundedD10 = Math.round(d10 * 100.0) / 100.0;
+            if (roundedD10 > 0) {
+                _resultData.put("CU", SieveAnalysisCalc.CalcUniformityCoefficient(roundedD60, roundedD10));
+            } else {
+                _resultData.put("CU", JSONObject.NULL);
+            }
+        } else {
+            _resultData.put("CU", JSONObject.NULL);
+        }
     }
 
     // Listener that will handle the fragments in result activity
@@ -224,8 +237,8 @@ public class ResultActivity extends AppCompatActivity implements LoaderManager.L
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
         if(data.moveToFirst()) {
-            setTitle("Analysis - " + data.getString(data.getColumnIndex(ASADBContract.ASADBEntry.COLUMN_ASADATA_TITLE)));
-            String wtRt = data.getString(data.getColumnIndex(ASADBContract.ASADBEntry.COLUMN_ASDADATA_JSONOBJECT));
+            setTitle("Analysis - " + data.getString(data.getColumnIndexOrThrow(ASADBContract.ASADBEntry.COLUMN_ASADATA_TITLE)));
+            String wtRt = data.getString(data.getColumnIndexOrThrow(ASADBContract.ASADBEntry.COLUMN_ASDADATA_JSONOBJECT));
             try {
                 JSONObject WeightRetained = new JSONObject(wtRt);
                 Log.d(LOG_TAG, WeightRetained.toString());
@@ -237,7 +250,7 @@ public class ResultActivity extends AppCompatActivity implements LoaderManager.L
                 bundle_data.putString("data", _xyData.toString());
                 GraphFragment gf = new GraphFragment();
                 gf.setArguments(bundle_data);
-                _fm.beginTransaction().add(R.id.fragmentHolder, gf).commit();
+                _fm.beginTransaction().replace(R.id.fragmentHolder, gf).commit();
             } catch (JSONException je) {
                 Log.d(LOG_TAG, "JSONException occurred in ResultActivity.java");
                 je.printStackTrace();
@@ -250,6 +263,7 @@ public class ResultActivity extends AppCompatActivity implements LoaderManager.L
         finish();
     }
 
+    @SuppressLint("GestureBackNavigation") // CompatibleActivity registers the system back callback.
     @Override
     public void onBackPressed()
     {
