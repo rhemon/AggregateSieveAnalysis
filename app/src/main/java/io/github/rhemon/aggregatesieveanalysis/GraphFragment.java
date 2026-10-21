@@ -3,7 +3,7 @@ package io.github.rhemon.aggregatesieveanalysis;
 import android.content.Context;
 import android.graphics.Paint;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+import android.app.Fragment;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,7 +30,7 @@ public class GraphFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View view =  inflater.inflate(R.layout.graph_fragment, container, false);
-        SemiLogGraph slg = new SemiLogGraph(this.getContext());
+        SemiLogGraph slg = new SemiLogGraph(getActivity());
         slg.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
         try {
             slg.setData(new JSONObject(getArguments().getString("data")));

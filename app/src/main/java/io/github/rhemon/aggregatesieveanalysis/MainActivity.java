@@ -1,5 +1,6 @@
 package io.github.rhemon.aggregatesieveanalysis;
 
+import android.annotation.SuppressLint;
 import android.app.LoaderManager;
 import android.content.ContentUris;
 import android.content.CursorLoader;
@@ -8,9 +9,9 @@ import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
+import android.widget.ImageButton;
+import android.app.AlertDialog;
+import android.app.Activity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,7 +23,7 @@ import io.github.rhemon.aggregatesieveanalysis.data.ASADBContract;
 
 import static android.R.id.list;
 
-public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
+public class MainActivity extends CompatibleActivity implements LoaderManager.LoaderCallbacks<Cursor> {
 
     private static final int ASADB_LOADER = 0;
     private int backButtonCount = 0;
@@ -34,7 +35,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         setContentView(R.layout.activity_main);
         setTitle(R.string.app_name);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        ImageButton fab = (ImageButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -72,6 +73,9 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
+            case R.id.privacy_policy:
+                startActivity(new Intent(this, PrivacyPolicyActivity.class));
+                return true;
             case R.id.delete_all:
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
                 builder.setMessage("Are you sure you want to delete all data? It will remove your access permanently.");
@@ -118,6 +122,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         mCursorAdapter.swapCursor(null);
     }
 
+    @SuppressLint("GestureBackNavigation") // CompatibleActivity registers the system back callback.
     @Override
     public void onBackPressed()
     {

@@ -3,7 +3,7 @@ package io.github.rhemon.aggregatesieveanalysis;
 import android.content.Context;
 import android.graphics.Paint;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+import android.app.Fragment;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -36,7 +36,8 @@ public class ResultFragment extends Fragment {
             ((TextView) view.findViewById(R.id.fm)).setText("Fineness Modulus = " + String.format("%.2f", data.getDouble("FINENESS_MODULUS")));
             ((TextView) view.findViewById(R.id.d60)).setText("D60 = " + String.format("%.2f", data.getDouble("D60")));
             ((TextView) view.findViewById(R.id.d10)).setText("D10 = " + String.format("%.2f", data.getDouble("D10")));
-            ((TextView) view.findViewById(R.id.uc)).setText("Uniform Coefficient = " + String.format("%.2f", data.getDouble("CU")));
+            ((TextView) view.findViewById(R.id.uc)).setText("Uniform Coefficient = " +
+                    (data.isNull("CU") ? "N/A" : String.format("%.2f", data.getDouble("CU"))));
         } catch (JSONException e) {
             e.printStackTrace();
         }

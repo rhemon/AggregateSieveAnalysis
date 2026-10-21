@@ -1,27 +1,47 @@
-apply plugin: 'com.android.application'
+plugins {
+    id 'com.android.application'
+}
 
 android {
-    compileSdkVersion 23
-    buildToolsVersion "23.0.2"
+    namespace 'io.github.rhemon.aggregatesieveanalysis'
+    compileSdk 36
+
+    def uploadKeystore = System.getenv('ASA_UPLOAD_KEYSTORE')
+    def uploadPassword = System.getenv('ASA_UPLOAD_PASSWORD')
+    if (uploadKeystore && uploadPassword) {
+        signingConfigs {
+            release {
+                storeFile file(uploadKeystore)
+                storePassword uploadPassword
+                keyAlias 'asa2-upload'
+                keyPassword uploadPassword
+            }
+        }
+    }
 
     defaultConfig {
-        applicationId "io.github.rhemon.aggregatesieveanalysis"
-        minSdkVersion 13
-        targetSdkVersion 23
-        versionCode 1
-        versionName "1.0"
+        applicationId 'io.github.rhemon.aggregatesieveanalysis.relaunch'
+        minSdk 13
+        targetSdk 36
+        versionCode 3
+        versionName '1.1.1'
     }
+
     buildTypes {
         release {
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            if (uploadKeystore && uploadPassword) {
+                signingConfig signingConfigs.release
+            }
         }
     }
-}
 
-dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:23.1.1'
-    compile 'com.android.support:design:24.1.1'
+    buildFeatures {
+        buildConfig true
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
