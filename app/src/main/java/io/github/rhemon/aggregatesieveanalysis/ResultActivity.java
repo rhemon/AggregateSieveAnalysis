@@ -250,7 +250,10 @@ public class ResultActivity extends CompatibleActivity implements LoaderManager.
                 bundle_data.putString("data", _xyData.toString());
                 GraphFragment gf = new GraphFragment();
                 gf.setArguments(bundle_data);
-                _fm.beginTransaction().replace(R.id.fragmentHolder, gf).commit();
+                // LoaderManager delivers this callback while FragmentManager disallows
+                // ordinary commits. The record is already saved; a recreated activity
+                // will receive the loader result again if this transaction is lost.
+                _fm.beginTransaction().replace(R.id.fragmentHolder, gf).commitAllowingStateLoss();
             } catch (JSONException je) {
                 Log.d(LOG_TAG, "JSONException occurred in ResultActivity.java");
                 je.printStackTrace();
